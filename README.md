@@ -1,10 +1,14 @@
-# Claude Code Skills — Interface Quality Toolkit
+# Claude Code Skills
 
-A collection of Claude Code skills for auditing digital interfaces. Drop in a screenshot, Figma URL, live URL, or HTML file and get structured UX/UI critique and WCAG 2.2 AA accessibility findings.
+A collection of Claude Code skills organized into two toolkits — interface quality auditing and QA test delivery.
 
 ---
 
-## Skills
+## Skill groups
+
+### 🎨 `design-validator/` — Interface quality toolkit
+
+Audit digital interfaces for UX/UI quality and WCAG 2.2 AA accessibility.
 
 | Skill | Command | Purpose |
 |---|---|---|
@@ -13,6 +17,20 @@ A collection of Claude Code skills for auditing digital interfaces. Drop in a sc
 | **wcag-inspector-universal** | `/wcag-inspector-universal` | Standalone WCAG 2.2 AA audit only — pass/fail per criterion, exact contrast ratios. |
 
 **`ux-ui-validator` supersedes the two standalone skills.** The standalones exist for focused, single-domain audits.
+
+---
+
+### 🧪 `qa-testing/` — QA test delivery toolkit
+
+An end-to-end workflow from PRD to live Xray test cases: build a test knowledge base → generate a risk-based test strategy → produce BDD/Cucumber test cases and import them into Xray.
+
+| Skill | Command | Purpose |
+|---|---|---|
+| **test-knowledge-base** | `/test-knowledge-base` | Build a structured map of what your existing Playwright/Cucumber suite covers |
+| **test-strategist** | `/test-strategist` | Turn a PRD into a risk-based test strategy (approach only, no test cases) |
+| **test-plan-creator** | `/test-plan-creator` | Generate prioritized BDD/Cucumber test cases + Xray Test Plan + import script |
+
+See [`qa-testing/README.md`](qa-testing/README.md) for setup, usage, and configuration.
 
 ---
 
@@ -179,13 +197,28 @@ File format: `ux-ui-validator-audit-[product-name]-[YYYY-MM-DD].html`
 
 ```
 design-validator/
-├── ux-ui-validator/          ← Unified skill (install this one)
+├── ux-ui-validator/                  ← Unified skill (install this one)
 │   └── SKILL.md
-├── uxui-inspector-universal/ ← Standalone UX/UI
+├── uxui-inspector-universal/         ← Standalone UX/UI
 │   └── SKILL.md
-└── wcag-inspector-universal/ ← Standalone WCAG
+└── wcag-inspector-universal/         ← Standalone WCAG
     └── SKILL.md
-README.md                     ← This file
+qa-testing/
+├── README.md                         ← Setup & usage guide
+├── test-knowledge-base/
+│   ├── SKILL.md
+│   ├── references/output-schema.md
+│   └── scripts/build-catalog.mjs    ← Pure-Node feature-file parser
+├── test-strategist/
+│   ├── SKILL.md
+│   └── references/strategy-template.md
+└── test-plan-creator/
+    ├── SKILL.md
+    ├── references/
+    │   ├── csv-format.md
+    │   └── test-plan-template.md
+    └── scripts/import-to-xray.mjs   ← Xray Cloud import script
+README.md                             ← This file
 ```
 
 Each skill is a single `SKILL.md` file — YAML frontmatter (`name`, `description`) followed by the full instruction document Claude executes as a system prompt when the skill is invoked.
